@@ -1,0 +1,18 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="core.master.cs" Inherits="www.core" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+	<title>Dashboard</title>
+	<asp:ContentPlaceHolder ID="head" runat="server">
+	</asp:ContentPlaceHolder>
+</head>
+<body>
+	<form id="form1" runat="server">
+		<h1>Master Page</h1>
+		<asp:ContentPlaceHolder ID="body" runat="server">
+		</asp:ContentPlaceHolder>
+	</form>
+</body>
+</html>
