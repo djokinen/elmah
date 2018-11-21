@@ -16,8 +16,8 @@ namespace www
 				applicationNames.DataSource = entities.ELMAH_Error.Select(s => s.Application).Distinct().ToList();
 				applicationNames.DataBind();
 
-				grid.DataSource = entities.ELMAH_Error.ToList();
-				grid.DataBind();
+				repeater.DataSource = entities.ELMAH_Error.ToList();
+				repeater.DataBind();
 			}
 		}
 	}
