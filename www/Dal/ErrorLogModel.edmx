@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ErrorLogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="ErrorLogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="ELMAH_Error">
           <Key>
             <PropertyRef Name="ErrorId" />
@@ -70,60 +70,26 @@
           <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SP_ErrorLog" EntityType="Self.SP_ErrorLog" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ErrorLogModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="ErrorLogEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="ELMAH_GetErrorsXml" ReturnType="Collection(String)">
-          <Parameter Name="Application" Mode="In" Type="String" />
-            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
-            <Parameter Name="PageSize" Mode="In" Type="Int32" />
-            <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ELMAH_GetErrorXml" ReturnType="Collection(String)">
-          <Parameter Name="Application" Mode="In" Type="String" />
-            <Parameter Name="ErrorId" Mode="In" Type="Guid" />
-          </FunctionImport>
-          <FunctionImport Name="ELMAH_LogError">
-          <Parameter Name="ErrorId" Mode="In" Type="Guid" />
-            <Parameter Name="Application" Mode="In" Type="String" />
-            <Parameter Name="Host" Mode="In" Type="String" />
-            <Parameter Name="Type" Mode="In" Type="String" />
-            <Parameter Name="Source" Mode="In" Type="String" />
-            <Parameter Name="Message" Mode="In" Type="String" />
-            <Parameter Name="User" Mode="In" Type="String" />
-            <Parameter Name="AllXml" Mode="In" Type="String" />
-            <Parameter Name="StatusCode" Mode="In" Type="Int32" />
-            <Parameter Name="TimeUtc" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <EntitySet Name="ELMAH_Error" EntityType="ErrorLogModel.ELMAH_Error" />
-          <EntitySet Name="SP_ErrorLog" EntityType="ErrorLogModel.SP_ErrorLog" />
-          <FunctionImport Name="Insert_SP_ErrorLog">
-            <Parameter Name="DBName" Mode="In" Type="String" />
-            <Parameter Name="ErrorMessage" Mode="In" Type="String" />
-            <Parameter Name="SPName" Mode="In" Type="String" />
-            <Parameter Name="ErrorNumber" Mode="In" Type="Int32" />
-            <Parameter Name="ErrorSeverity" Mode="In" Type="Int32" />
-            <Parameter Name="ErrorState" Mode="In" Type="Int32" />
-            <Parameter Name="ErrorLine" Mode="In" Type="Int32" />
-          </FunctionImport>
-        </EntityContainer>
         <EntityType Name="ELMAH_Error">
           <Key>
             <PropertyRef Name="ErrorId" />
           </Key>
           <Property Name="ErrorId" Type="Guid" Nullable="false" />
-          <Property Name="Application" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="Host" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Source" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="User" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Application" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Source" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StatusCode" Type="Int32" Nullable="false" />
           <Property Name="TimeUtc" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Sequence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AllXml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AllXml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="SP_ErrorLog">
           <Key>
@@ -139,47 +105,82 @@
           <Property Name="ErrorState" Type="Int32" />
           <Property Name="ErrorLine" Type="Int32" />
         </EntityType>
+        <EntityContainer Name="ErrorLogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" />
+          <EntitySet Name="SP_ErrorLog" EntityType="Self.SP_ErrorLog" />
+          <FunctionImport Name="ELMAH_GetErrorsXml" ReturnType="Collection(String)">
+            <Parameter Name="Application" Mode="In" Type="String" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ELMAH_GetErrorXml" ReturnType="Collection(String)">
+            <Parameter Name="Application" Mode="In" Type="String" />
+            <Parameter Name="ErrorId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="ELMAH_LogError">
+            <Parameter Name="ErrorId" Mode="In" Type="Guid" />
+            <Parameter Name="Application" Mode="In" Type="String" />
+            <Parameter Name="Host" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="Source" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="User" Mode="In" Type="String" />
+            <Parameter Name="AllXml" Mode="In" Type="String" />
+            <Parameter Name="StatusCode" Mode="In" Type="Int32" />
+            <Parameter Name="TimeUtc" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_SP_ErrorLog">
+            <Parameter Name="DBName" Mode="In" Type="String" />
+            <Parameter Name="ErrorMessage" Mode="In" Type="String" />
+            <Parameter Name="SPName" Mode="In" Type="String" />
+            <Parameter Name="ErrorNumber" Mode="In" Type="Int32" />
+            <Parameter Name="ErrorSeverity" Mode="In" Type="Int32" />
+            <Parameter Name="ErrorState" Mode="In" Type="Int32" />
+            <Parameter Name="ErrorLine" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ErrorLogModelStoreContainer" CdmEntityContainer="ErrorLogEntities">
-          <FunctionImportMapping FunctionImportName="ELMAH_GetErrorsXml" FunctionName="ErrorLogModel.Store.ELMAH_GetErrorsXml" />
-          <FunctionImportMapping FunctionImportName="ELMAH_GetErrorXml" FunctionName="ErrorLogModel.Store.ELMAH_GetErrorXml" />
-          <FunctionImportMapping FunctionImportName="ELMAH_LogError" FunctionName="ErrorLogModel.Store.ELMAH_LogError" />
           <EntitySetMapping Name="ELMAH_Error">
             <EntityTypeMapping TypeName="ErrorLogModel.ELMAH_Error">
               <MappingFragment StoreEntitySet="ELMAH_Error">
-                <ScalarProperty Name="AllXml" ColumnName="AllXml" />
-                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
-                <ScalarProperty Name="TimeUtc" ColumnName="TimeUtc" />
-                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
-                <ScalarProperty Name="User" ColumnName="User" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Source" ColumnName="Source" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Host" ColumnName="Host" />
-                <ScalarProperty Name="Application" ColumnName="Application" />
                 <ScalarProperty Name="ErrorId" ColumnName="ErrorId" />
+                <ScalarProperty Name="Application" ColumnName="Application" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="TimeUtc" ColumnName="TimeUtc" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="AllXml" ColumnName="AllXml" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SP_ErrorLog">
             <EntityTypeMapping TypeName="ErrorLogModel.SP_ErrorLog">
               <MappingFragment StoreEntitySet="SP_ErrorLog">
-                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
-                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
-                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
-                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
-                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
-                <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
-                <ScalarProperty Name="SPName" ColumnName="SPName" />
-                <ScalarProperty Name="DBName" ColumnName="DBName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DBName" ColumnName="DBName" />
+                <ScalarProperty Name="SPName" ColumnName="SPName" />
+                <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ELMAH_GetErrorsXml" FunctionName="ErrorLogModel.Store.ELMAH_GetErrorsXml" />
+          <FunctionImportMapping FunctionImportName="ELMAH_GetErrorXml" FunctionName="ErrorLogModel.Store.ELMAH_GetErrorXml" />
+          <FunctionImportMapping FunctionImportName="ELMAH_LogError" FunctionName="ErrorLogModel.Store.ELMAH_LogError" />
           <FunctionImportMapping FunctionImportName="Insert_SP_ErrorLog" FunctionName="ErrorLogModel.Store.Insert_SP_ErrorLog" />
         </EntityContainerMapping>
       </Mapping>

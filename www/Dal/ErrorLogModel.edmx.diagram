@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0135fe7dc4b14580b53687df64e52582" Name="Diagram1">
-        <EntityTypeShape EntityType="ErrorLogModel.ELMAH_Error" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ErrorLogModel.SP_ErrorLog" Width="1.5" PointX="2.75" PointY="0.75" />
+      <Diagram DiagramId="607bc005f65445a2ad9b3e1196ec357d" Name="Diagram1">
+        <EntityTypeShape EntityType="ErrorLogModel.ELMAH_Error" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErrorLogModel.SP_ErrorLog" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

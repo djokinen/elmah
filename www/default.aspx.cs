@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using www.Dal;
 
 namespace www
 {
@@ -11,14 +12,11 @@ namespace www
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			using (var entities = new ErrorLogEntities())
-			{
-				applicationNames.DataSource = entities.ELMAH_Error.Select(s => s.Application).Distinct().ToList();
-				applicationNames.DataBind();
+			// applicationNames.DataSource = DataAccess.GetErrors().Select(s => s.Application).Distinct().ToList();
+			// applicationNames.DataBind();
 
-				repeater.DataSource = entities.ELMAH_Error.ToList();
-				repeater.DataBind();
-			}
+			repeater.DataSource = DataAccess.GetErrorsGrouped();
+			repeater.DataBind();
 		}
 	}
 }

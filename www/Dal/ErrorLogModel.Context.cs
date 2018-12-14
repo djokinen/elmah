@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace www
+namespace www.Dal
 {
     using System;
     using System.Data.Entity;
