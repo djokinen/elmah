@@ -98,6 +98,7 @@
       <LastGenOutput>ErrorLogModel.cs</LastGenOutput>
     </Content>
     <Content Include="default.aspx" />
+    <Content Include="favicon.ico" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
